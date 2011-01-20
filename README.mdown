@@ -1,0 +1,9 @@
+# Google Charts QR Code wrapper
+
+Generate url strings and HTML img tags for QR codes
+
+    chart = GoogleQR.new(:data => "SomeDataToQRify", :size => "100x100") # only data is required
+    chart.to_s
+    #=> "https://chart.googleapis.com/chart?cht=qr&chl=SomeDataToQRify"
+    chart.render
+    #=> "<img src='https://chart.googleapis.com/chart?cht=qr&chl=SomeDataToQRify' width='100' height='100'/>"
