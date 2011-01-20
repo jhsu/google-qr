@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
 	s.name          = "google-qr"
 	s.version       = "0.1"
-	s.date          = Date.today.to_s
+	s.date          = "2011-01-20"
 	s.platform      = Gem::Platform::RUBY
 	s.summary       = "Wrapper for Google Chart QR code"
 	s.description   = "Generate URL string for Google QR code and render HTML img string"
