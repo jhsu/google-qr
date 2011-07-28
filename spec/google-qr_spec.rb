@@ -14,15 +14,15 @@ describe "GoogleQR" do
       it "raises without data" do
         @qr_code.to_s.should raise_error
       end
-    
-      it "renders without size" do
+          
+      it "renders with the default size of 100x100" do
         @qr_code.data = "ExampleQRData"
-        @qr_code.to_s.should == "https://chart.googleapis.com/chart?cht=qr&chl=ExampleQRData"
+        @qr_code.to_s.should == "https://chart.googleapis.com/chart?cht=qr&chl=ExampleQRData&chs=100x100"
       end
     
       it "render with a size given" do
-        @qr_code.size = "100x100"
-        @qr_code.to_s.should == "https://chart.googleapis.com/chart?cht=qr&chl=#{@qr_code.data}&chs=100x100"
+        @qr_code.size = "200x200"
+        @qr_code.to_s.should == "https://chart.googleapis.com/chart?cht=qr&chl=#{@qr_code.data}&chs=200x200"
       end
     end
   
