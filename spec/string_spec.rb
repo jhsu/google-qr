@@ -10,6 +10,15 @@ describe "GoogleQR" do
       it "returns a qr code <img /> tag" do
         "ExampleQRData".to_qr_image.should == GoogleQR.new(:data => "ExampleQRData").render
       end
+      
+      it "to_qr accepts the same args" do
+        "ExampleQRData".to_qr(:size => "200x200").should == GoogleQR.new(:data => "ExampleQRData", :size => "200x200").to_s
+      end
+      
+      it "to_qr_image accepts the same args" do
+        "ExampleQRData".to_qr_image(:size => "200x200").should == 
+          GoogleQR.new(:data => "ExampleQRData", :size => "200x200").render
+      end
     end
   end
 end
