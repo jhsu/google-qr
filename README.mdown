@@ -18,7 +18,15 @@ Generate url strings and HTML img tags for QR codes
 
     chart.render
     #=> "<img src='https://chart.googleapis.com/chart?cht=qr&chl=SomeDataToQRify&chs=100x100' width='100' height='100'/>"
+    
+You can also use the to_qr and to_qr_image methods on String objects.
 
+    "ExampleQRData".to_qr
+    #=> https://chart.googleapis.com/chart?cht=qr&chl=ExampleQRData&chs=100x100
+
+    "ExampleQRData".to_qr_image
+    <img src='https://chart.googleapis.com/chart?cht=qr&chl=ExampleQRData&chs=100x100' height='100' width='100' />
+    
 ## Testing
 
-    To run the tests just run the rake command from the root of the gem.
+To run the tests just run the rake command from the root of the gem.
