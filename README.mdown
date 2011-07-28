@@ -26,6 +26,9 @@ You can also use the to_qr and to_qr_image methods on String objects.
 
     "ExampleQRData".to_qr_image
     <img src='https://chart.googleapis.com/chart?cht=qr&chl=ExampleQRData&chs=100x100' height='100' width='100' />
+
+    "ExampleQRData".to_qr(:size => "200x200")
+    #=> https://chart.googleapis.com/chart?cht=qr&chl=ExampleQRData&chs=200x200
     
 ## Testing
 
