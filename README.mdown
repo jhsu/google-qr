@@ -10,7 +10,8 @@ Generate url strings and HTML img tags for QR codes
 ## Usage
 
     require 'google-qr'
-    chart = GoogleQR.new(:data => "SomeDataToQRify", :size => "100x100") # only data is required
+    # data and size are both required. size defaults to "100x100".
+    chart = GoogleQR.new(:data => "SomeDataToQRify", :size => "100x100")
 
     chart.to_s
     #=> "https://chart.googleapis.com/chart?cht=qr&chl=SomeDataToQRify&chs=100x100"
