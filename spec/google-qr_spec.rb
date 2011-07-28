@@ -8,9 +8,10 @@ describe "GoogleQR" do
   context "generating" do
     describe "to_s" do
       it "raises without data" do
-        @qr_code.to_s.should raise_error
+        @qr_code.data = nil
+        lambda{@qr_code.to_s}.should raise_error
       end
-          
+                
       it "renders with the default size of 100x100" do
         @qr_code.data = "ExampleQRData"
         @qr_code.to_s.should == "https://chart.googleapis.com/chart?cht=qr&chl=ExampleQRData&chs=100x100"
@@ -28,29 +29,25 @@ describe "GoogleQR" do
       
     end
   
-    describe "render" do
-      it "returns an <img /> tag" do
-        @qr_code.size = nil
-        @qr_code.render.should == "<img src='https://chart.googleapis.com/chart?cht=qr&chl=#{@qr_code.data}'/>"
-      end
-    
-      it "returns and <img /> tag with width and height attributes" do
+    describe "renders" do        
+      it "renders and <img /> tag with width and height attributes" do
         @qr_code.size = "100x100"
         @qr_code.render.should == "<img src='https://chart.googleapis.com/chart?cht=qr&chl=#{@qr_code.data}&chs=#{@qr_code.size}' height='100' width='100' />"
-      end
+      end      
     end
-  end
-  
-  describe "to_qr" do
-    context "String objects" do
-      it "returns a qr code image string" do
-        "ExampleQRData".to_qr.should == GoogleQR.new(:data => "ExampleQRData").to_s
+    
+    describe "options" do
+      it "can set encoding" do
+        @qr_code.encoding = "Shift_JIS"
+        @qr_code.to_s.should == "https://chart.googleapis.com/chart?cht=qr&chl=#{@qr_code.data}&chs=#{@qr_code.size}&choe=Shift_JIS"
       end
       
-      it "returns a qr code <img /> tag" do
-        "ExampleQRData".to_qr_image.should == GoogleQR.new(:data => "ExampleQRData").render
+      it "can set error correction level" do
+        @qr_code.error_correction = "L"
+        @qr_code.to_s.should == "https://chart.googleapis.com/chart?cht=qr&chl=#{@qr_code.data}&chs=#{@qr_code.size}&chld=L"
       end
     end
+    
   end
-  
+    
 end
