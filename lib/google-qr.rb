@@ -1,3 +1,5 @@
+require 'string'
+
 class GoogleQR
   attr_accessor :data, :size, :use_https
   def initialize(opts={:data => "http://google.com", :size => "100x100", :use_https => true})
@@ -24,6 +26,7 @@ class GoogleQR
     "<img src='#{self.to_s}'#{dimensions}/>"
   end
   
+  private
   def base_url
     "http#{self.use_https ? 's' : ''}://chart.googleapis.com/chart?cht=qr&"
   end
