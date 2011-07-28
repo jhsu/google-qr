@@ -1,4 +1,4 @@
-# Google Charts QR Code wrapper
+# Google Charts QR Code wrapper [![Build Status](http://travis-ci.org/jhsu/google-qr.png)](http://travis-ci.org/jhsu/google-qr)
 
 Generate url strings and HTML img tags for QR codes
 
