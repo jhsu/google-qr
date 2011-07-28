@@ -1,7 +1,7 @@
 class GoogleQR
   BASE_URL = "https://chart.googleapis.com/chart?cht=qr&"
   attr_accessor :data, :size
-  def initialize(opts={:data => "http://google.com"})
+  def initialize(opts={:data => "http://google.com", :size => "100x100"})
     opts.each {|key,value| self.send("#{key}=", value) }
   end
 
