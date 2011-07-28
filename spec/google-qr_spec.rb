@@ -5,10 +5,6 @@ describe "GoogleQR" do
     @qr_code = GoogleQR.new
   end
   
-  it "knows the base google api url" do
-    GoogleQR::BASE_URL.should == "https://chart.googleapis.com/chart?cht=qr&"
-  end
-  
   context "generating" do
     describe "to_s" do
       it "raises without data" do
@@ -24,6 +20,12 @@ describe "GoogleQR" do
         @qr_code.size = "200x200"
         @qr_code.to_s.should == "https://chart.googleapis.com/chart?cht=qr&chl=#{@qr_code.data}&chs=200x200"
       end
+      
+      it "renders without https if requested" do
+        @qr_code.use_https = false
+        @qr_code.to_s.should == "http://chart.googleapis.com/chart?cht=qr&chl=#{@qr_code.data}&chs=#{@qr_code.size}"
+      end
+      
     end
   
     describe "render" do
