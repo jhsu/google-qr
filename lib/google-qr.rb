@@ -1,4 +1,5 @@
 require 'string'
+require 'uri'
 
 class GoogleQR
   attr_accessor :data,
@@ -6,11 +7,11 @@ class GoogleQR
                 :use_https,
                 :encoding,
                 :error_correction
-  
+
   def initialize(opts={})
     options = {
-      :data => "http://google.com", 
-      :size => "100x100", 
+      :data => "GoogleQR",
+      :size => "100x100",
       :use_https => true
     }.merge!(opts)
 
@@ -19,7 +20,7 @@ class GoogleQR
 
   def to_s
     if self.data
-      params = ["chl=#{self.data}"]
+      params = ["chl=#{URI.encode(self.data, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}"]
       params << "chs=#{self.size}" if self.size
       params << "choe=#{self.encoding}" if self.encoding
       params << "chld=#{self.error_correction}" if self.error_correction
@@ -38,7 +39,7 @@ class GoogleQR
     end
     "<img src='#{self.to_s}'#{dimensions}/>"
   end
-  
+
   private
   def base_url
     "http#{self.use_https ? 's' : ''}://chart.googleapis.com/chart?cht=qr&"
