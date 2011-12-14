@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
 	s.description   = "Generate URL string for Google QR code and render HTML img string"
 
 	s.authors  = ["Joseph Hsu", "Nick Hammond"]
-	s.emails   = ["jhsu@josephhsu.com", "nrhammond@gmail.com"]
+	s.email    = ["jhsu@josephhsu.com", "nrhammond@gmail.com"]
 	s.homepage = "http://github.com/jhsu/google-qr"
 
 	s.require_paths = ["lib"]
