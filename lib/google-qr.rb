@@ -20,7 +20,7 @@ class GoogleQR
 
   def to_s
     if self.data
-      params = ["chl=#{URI.encode(self.data, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}"]
+      params = ["chl=#{escape_string(self.data)}"]
       params << "chs=#{self.size}"
       params << "choe=#{self.encoding}" if self.encoding
       params << error_correction_params if error_correction_param?
@@ -58,7 +58,11 @@ class GoogleQR
       param = "#{self.error_correction}|#{self.margin}"
     end  
     
-    "chld=#{param}"
+    "chld=#{escape_string(param)}"
+  end
+  
+  def escape_string(string)
+    URI.encode(string, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
   end
   
 end

@@ -49,18 +49,18 @@ describe "GoogleQR" do
       
       it "can set error correction the google way" do
         @qr_code.error_correction = "L|5"
-        @qr_code.to_s.should == "https://chart.googleapis.com/chart?cht=qr&chl=#{@qr_code.data}&chs=#{@qr_code.size}&chld=L|5"        
+        @qr_code.to_s.should == "https://chart.googleapis.com/chart?cht=qr&chl=#{@qr_code.data}&chs=#{@qr_code.size}&chld=L%7C5"        
       end
       
       it "can set just margin" do
         @qr_code.margin = 1
-        @qr_code.to_s.should == "https://chart.googleapis.com/chart?cht=qr&chl=#{@qr_code.data}&chs=#{@qr_code.size}&chld=L|1"
+        @qr_code.to_s.should == "https://chart.googleapis.com/chart?cht=qr&chl=#{@qr_code.data}&chs=#{@qr_code.size}&chld=L%7C1"
       end
       
       it "can set error correction & margin" do
         @qr_code.margin = 2
         @qr_code.error_correction = "M"
-        @qr_code.to_s.should == "https://chart.googleapis.com/chart?cht=qr&chl=#{@qr_code.data}&chs=#{@qr_code.size}&chld=M|2"
+        @qr_code.to_s.should == "https://chart.googleapis.com/chart?cht=qr&chl=#{@qr_code.data}&chs=#{@qr_code.size}&chld=M%7C2"
       end
       
       it "renders with a size given" do
