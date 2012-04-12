@@ -1,7 +1,6 @@
 # Google Charts QR Code wrapper [![Build Status](http://travis-ci.org/jhsu/google-qr.png)](http://travis-ci.org/jhsu/google-qr)
 
-Generate url strings and HTML img tags for QR codes
-
+Generate url strings and HTML img tags for QR codes from [Google's QR code infographics API](https://developers.google.com/chart/infographics/docs/qr_codes)
 
 ## Install
 
@@ -11,7 +10,8 @@ Generate url strings and HTML img tags for QR codes
 
     require 'google-qr'
     # data and size are both required. size defaults to "100x100".
-    chart = GoogleQR.new(:data => "SomeDataToQRify", :size => "100x100")
+    # The default margin is 4 and default error correction level is 'L'
+    chart = GoogleQR.new(:data => "SomeDataToQRify", :size => "100x100", :margin => 4, :error_correction => "L")
 
     chart.to_s
     #=> "https://chart.googleapis.com/chart?cht=qr&chl=SomeDataToQRify&chs=100x100"
