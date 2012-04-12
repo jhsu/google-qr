@@ -6,11 +6,11 @@ class GoogleQR
                 :size,
                 :use_https,
                 :encoding,
-                :error_correction
+                :error_correction,
+                :margin
 
   def initialize(opts={})
     options = {
-      :data => "GoogleQR",
       :size => "100x100",
       :use_https => true
     }.merge!(opts)
@@ -21,9 +21,9 @@ class GoogleQR
   def to_s
     if self.data
       params = ["chl=#{URI.encode(self.data, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}"]
-      params << "chs=#{self.size}" if self.size
+      params << "chs=#{self.size}"
       params << "choe=#{self.encoding}" if self.encoding
-      params << "chld=#{self.error_correction}" if self.error_correction
+      params << error_correction_params if error_correction_param?
       base_url + params.join("&")
     else
       raise "Attribute @data is required for GoogleQR code"
@@ -44,4 +44,21 @@ class GoogleQR
   def base_url
     "http#{self.use_https ? 's' : ''}://chart.googleapis.com/chart?cht=qr&"
   end
+  
+  def error_correction_param?
+    self.error_correction || self.margin
+  end
+  
+  def error_correction_params
+    if !self.error_correction && self.margin
+      param = "L|#{self.margin}"
+    elsif self.error_correction && !self.margin
+      param = self.error_correction
+    else
+      param = "#{self.error_correction}|#{self.margin}"
+    end  
+    
+    "chld=#{param}"
+  end
+  
 end
