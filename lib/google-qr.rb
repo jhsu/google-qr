@@ -2,12 +2,7 @@ require 'string'
 require 'uri'
 
 class GoogleQR
-  attr_accessor :data,
-                :size,
-                :use_https,
-                :encoding,
-                :error_correction,
-                :margin
+  attr_accessor :data, :size, :use_https, :encoding, :error_correction, :margin, :style, :classname
 
   def initialize(opts={})
     options = {
@@ -37,7 +32,20 @@ class GoogleQR
     else
       dimensions = nil
     end
-    "<img src='#{self.to_s}'#{dimensions}/>"
+
+    if self.classname
+      classname = "class='" + self.classname + "' "
+    else
+      classname = nil
+    end
+
+    if self.style
+      style = "style='" + self.style + "' "
+    else
+      style = nil
+    end
+
+    "<img src='#{self.to_s}'#{dimensions}#{classname}#{style}/>"
   end
 
   private
