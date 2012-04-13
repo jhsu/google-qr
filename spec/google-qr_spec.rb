@@ -27,9 +27,13 @@ describe "GoogleQR" do
     describe "renders" do
       it "renders and <img /> tag with width and height attributes" do
         @qr_code.size = "100x100"
-        @qr_code.style = "margin-left:12px;"
-        @qr_code.classname = "img_class"
         @qr_code.data = "https://www.google.com/images/logo.png"
+        @qr_code.render.should == "<img src='https://chart.googleapis.com/chart?cht=qr&chl=#{URI.encode(@qr_code.data, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}&chs=#{@qr_code.size}' height='100' width='100' />"
+      end
+
+      it "renders and <img /> tag with html attributes given in html_options" do
+        @qr_code.data = "https://www.google.com/images/logo.png"
+        @qr_code.html_options = { :class => "img_class", :style => "margin-left:12px;" }
         @qr_code.render.should == "<img src='https://chart.googleapis.com/chart?cht=qr&chl=#{URI.encode(@qr_code.data, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}&chs=#{@qr_code.size}' height='100' width='100' class='img_class' style='margin-left:12px;' />"
       end
     end
